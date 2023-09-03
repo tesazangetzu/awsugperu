@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+main {
+  width: 100%;
+  height: auto;
+  min-height: calc(100vh - 204px);
+  @media (max-width: 425px) {
+    min-height: calc(100vh - 220px);
+  }
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Oswald-SemiBold", sans-serif;
+  font-weight: 600;
+  line-height: 1.31;
+}
+
+.transform-scale-h {
+  display: inline-block;
+  transform: perspective(1px) scale(1) translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+
+  &:hover {
+    transform: perspective(1px) scale(1.1) translateZ(0);
+  }
+}
+
+a,
+a:hover,
+*:hover {
+  transition: all .3s ease;
+}
+
+.container{
+  margin: 0 auto;
+  padding: 0 16px;
+
+  &-fluid{
+    padding: 0 16px;
+ }
+}

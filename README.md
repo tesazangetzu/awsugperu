@@ -1,49 +1,33 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby Minimal TypeScript Starter
-</h1>
+# AWSUGPERU
 
-## 🚀 Quick start
+<!-- ## .env example
 
-1.  **Create a Gatsby site.**
+```
 
-    Use the Gatsby CLI to create a new site, specifying the minimal TypeScript starter.
+``` -->
 
-    ```shell
-    # create a new Gatsby site using the minimal TypeScript starter
-    npm init gatsby -- -ts
-    ```
+## Setup:
 
-2.  **Start developing.**
+1. Install dependencies
 
-    Navigate into your new site’s directory and start it up.
+> npm install
 
-    ```shell
-    cd my-gatsby-site/
-    npm run develop
-    ```
+<!-- 2. Create and configure .env -->
 
-3.  **Open the code and start customizing!**
+<!-- . Run migrations -->
 
-    Your site is now running at http://localhost:8000!
+<!-- > npm run migration -->
 
-    Edit `src/pages/index.tsx` to see your site update in real-time!
+2. Start server
 
-4.  **Learn more**
+<!-- > nodemon src/app.js -->
 
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-    - [Tutorials](https://www.gatsbyjs.com/docs/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-    - [Guides](https://www.gatsbyjs.com/docs/how-to/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
+<!-- or -->
 
-## 🚀 Quick start (Netlify)
+> npm run dev
 
-Deploy this starter with one click on [Netlify](https://app.netlify.com/signup):
+<!-- or Start to dev
 
-[<img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify" />](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-minimal-ts)
+> sls deploy
+
+### Note: Before starting project deploy a database for mysql at RDS or local enviroment -->

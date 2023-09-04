@@ -8,6 +8,10 @@ module.exports = {
     extend: {
       backgroundImage: {
         "header-custom": "url('../images/back-header-3.png')",
+        "reward-custom": "url('../images/reward.jpg')",
+      },
+      backgroundColor: {
+        "white-trans-6": "#ffffffd1",
       },
     },
   },

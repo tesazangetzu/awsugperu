@@ -5,9 +5,9 @@
 main {
   width: 100%;
   height: auto;
-  min-height: calc(100vh - 204px);
+  min-height: calc(100vh - 244px);
   @media (max-width: 425px) {
-    min-height: calc(100vh - 220px);
+    min-height: calc(100vh - 260px);
   }
 }
 
@@ -52,4 +52,64 @@ a:hover,
   &-fluid{
     padding: 0 16px;
  }
+}
+
+$hexagonColor : red;
+.hexagon {
+  width: 100px;
+  height: 57.735px;
+  background: $hexagonColor;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+  }
+
+  &::before {
+    top: -28px;
+    border-bottom: 28px solid $hexagonColor;
+  }
+
+  &::after {
+    bottom: -28px;
+    border-top: 28px solid $hexagonColor;
+  }
+}
+
+.circle{
+  width: 100px;
+  height: 100px;
+  padding: 15px;
+  background: rgb(63,94,251,);
+  background: linear-gradient(142deg, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+  border: none;
+  border-radius: 50%;
+  margin: 25px;
+  position: relative;
+  z-index: 0;
+  span{
+    color: white;
+    z-index: 1;
+  }
+
+  &.white{
+    &::after{
+      content: "";
+      position: absolute;
+      background-color: white;
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+    }
+    span{
+      color: black;
+    }
+  }
 }

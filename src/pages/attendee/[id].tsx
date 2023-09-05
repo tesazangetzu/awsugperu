@@ -7,7 +7,7 @@ const Attendee = ({ params }: any) => {
     <Layout>
       <section className="py-12">
         <div className="w-4/5 md:w-2/4 m-auto p-5 border rounded-md lg:flex lg:justify-between lg:items-center">
-          <div>
+          <div className="lg:w-2/4">
             <div className="flex justify-between items-center mb-3">
               <h2 className="text-lg"> Event Profile</h2>
               <button
@@ -53,4 +53,4 @@ const Attendee = ({ params }: any) => {
 
 export default Attendee;
 
-export const Head: HeadFC = () => <title>AWS Perú</title>;
+export { Head } from "../index";

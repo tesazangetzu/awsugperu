@@ -31,3 +31,5 @@ const Register = () => {
 };
 
 export default Register;
+
+export { Head } from "../index";

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link, type HeadFC, type PageProps } from "gatsby";
+import { Link, type PageProps } from "gatsby";
 import { Layout } from "../components/Layout";
 
 const IndexPage: React.FC<PageProps> = () => {
@@ -35,4 +35,4 @@ const IndexPage: React.FC<PageProps> = () => {
 
 export default IndexPage;
 
-export const Head: HeadFC = () => <title>AWS Perú</title>;
+export const Head = () => <title>AWS UG Peru</title>;

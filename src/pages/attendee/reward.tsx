@@ -1,7 +1,6 @@
 import * as React from "react";
-import { Layout } from "../components/Layout";
-import { HeadFC } from "gatsby";
-import logoWhite from "../images/logo-white.png";
+import { Layout } from "../../components/Layout";
+import logoWhite from "../../images/logo-white.png";
 
 const Reward = () => {
   const items = [
@@ -18,15 +17,17 @@ const Reward = () => {
   return (
     <Layout>
       <section className="bg-reward-custom bg-no-repeat bg-cover h-full p-2 md:p-9">
-        <div className="bg-white-trans-6 rounded-2xl p-4 sm:w-full md:w-4/5 m-auto mb-3">
+        <div className="bg-white-trans-6 rounded-2xl p-4 sm:w-full md:w-4/5 lg:w-3/5 m-auto mb-3">
           <div>
             <div>
               <h3 className="text-xl">&lt; Have Fun /&gt;</h3>
             </div>
             <div className="hex-container">
               <div className="py-6 grid grid-cols-3">
-                {items.map((item) => (
-                  <div className="hex">{item}</div>
+                {items.map((item, key) => (
+                  <div className={`hex ${key === 2 ? "alter" : ""}`}>
+                    <span>{item}</span>
+                  </div>
                 ))}
               </div>
             </div>
@@ -36,7 +37,7 @@ const Reward = () => {
             <div>
               <h3 className="text-xl text-right">&lt; Connect /&gt;</h3>
             </div>
-            <div className="py-6 grid grid-cols-3 gap-3">
+            <div className="py-6 grid grid-cols-3 gap-3 sm:w-full lg:grid-cols-4 md:w-3/5 m-auto">
               {items.map((item, key) => {
                 return (
                   <div
@@ -61,4 +62,4 @@ const Reward = () => {
 
 export default Reward;
 
-export const Head: HeadFC = () => <title>AWS Perú</title>;
+export { Head } from "../index";

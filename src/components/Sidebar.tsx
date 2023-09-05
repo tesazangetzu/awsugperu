@@ -28,7 +28,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ menu, setMenu }) => {
             </Link>
           </li>
           <li>
-            <Link to="/" className="hover:bg-orange-200">
+            <Link to="/attendee/reward" className="hover:bg-orange-200">
               Rewards
             </Link>
           </li>

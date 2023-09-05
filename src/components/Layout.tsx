@@ -2,6 +2,7 @@ import * as React from "react";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { Banner } from "./Banner";
+import { HeadFC } from "gatsby";
 
 export const Layout = ({ children }: any) => {
   return (
@@ -13,3 +14,5 @@ export const Layout = ({ children }: any) => {
     </>
   );
 };
+
+export const Head: HeadFC = () => <title>AWS Perú</title>;

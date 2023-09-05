@@ -25,9 +25,6 @@ export const Header = () => {
               <img src={logo} alt="logo" width={120} />
             </Link>
           </div>
-          <div className="flex flex-grow-0 text-sm">
-            <Link to="/">Logout</Link>
-          </div>
         </nav>
       </div>
     </header>

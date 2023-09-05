@@ -19,7 +19,10 @@ const IndexPage: React.FC<PageProps> = () => {
               >
                 Admin
               </Link>
-              <Link to="" className="hover:bg-black hover:text-white">
+              <Link
+                to="/attendee/welcome"
+                className="hover:bg-black hover:text-white"
+              >
                 Attendee
               </Link>
             </div>

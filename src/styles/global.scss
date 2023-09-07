@@ -17,6 +17,13 @@ main {
   }
 }
 
+.hvh-custom{
+  min-height: calc(100vh - 244px);
+  @media (max-width: 425px) {
+    min-height: calc(100vh - 260px);
+  }
+}
+
 .h1,
 .h2,
 .h3,

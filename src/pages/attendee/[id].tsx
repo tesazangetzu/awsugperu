@@ -110,7 +110,10 @@ const Attendee = ({ params }: { params: IParams }) => {
     <Layout>
       <section className="py-12">
         {loader ? (
-          <Loader open={loader} className="pt-6" />
+          <Loader
+            open={loader}
+            className="flex justify-center items-center hvh-custom"
+          />
         ) : (
           <>
             {!user ? (

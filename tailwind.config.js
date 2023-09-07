@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        "header-custom": "url('../images/back-header-3.png')",
+        "header-custom": "url('../images/back-header.png')",
         "reward-custom": "url('../images/reward.jpg')",
       },
       backgroundColor: {

@@ -1,18 +1,43 @@
 import * as React from "react";
+import { useEffect, useState } from "react";
 import { Layout } from "../../components/Layout";
 import logoWhite from "../../images/logo-white.png";
 
+interface IFunAndConnect {
+  feature_id: string;
+  name: string;
+  status: string;
+  type: string;
+}
+
 const Reward = () => {
-  const items = [
-    "Element 1",
-    "Element 2",
-    "Element 3",
-    "Element 4",
-    "Element 5",
-    "Element 6",
-    "Element 7",
-    "Element 8",
-  ];
+  const [fun, setFun] = useState<IFunAndConnect[]>();
+  const [connect, setConnect] = useState<IFunAndConnect[]>();
+  const [loader, setLoader] = useState<boolean>(true);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await fetch(`${process.env.API_URL}/me/rewards`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("user")}`,
+          },
+        });
+        const res = await response.json();
+        if (res.status) {
+          setFun(res.data.fun);
+          setConnect(res.data.connect);
+          setLoader(false);
+        }
+      } catch (error) {
+        console.error("Error al obtener los datos:", error);
+      }
+    };
+
+    getData();
+    console.log(fun, connect);
+  }, []);
 
   return (
     <Layout>
@@ -24,31 +49,36 @@ const Reward = () => {
             </div>
             <div className="hex-container">
               <div className="py-6 grid grid-cols-3">
-                {items.map((item, key) => (
-                  <div className={`hex ${key === 2 ? "alter" : ""}`}>
-                    <span>{item}</span>
-                  </div>
-                ))}
+                {fun &&
+                  fun.map((item, key) => (
+                    <div
+                      className={`hex ${
+                        item.status !== "UNVISITED" ? "alter" : ""
+                      }`}
+                      key={key}
+                    >
+                      <span>{item.name}</span>
+                    </div>
+                  ))}
               </div>
             </div>
           </div>
-
           <div>
             <div>
               <h3 className="text-xl text-right">&lt; Connect /&gt;</h3>
             </div>
             <div className="py-6 grid grid-cols-3 gap-3 sm:w-full lg:grid-cols-4 md:w-3/5 m-auto">
-              {items.map((item, key) => {
-                return (
+              {connect &&
+                connect.map((item, key) => (
                   <div
                     className={`circle flex justify-center items-center ${
-                      key === 2 ? " white" : ""
+                      item.status !== "UNVISITED" ? "white" : ""
                     }`}
+                    key={key}
                   >
-                    <span>{item}</span>
+                    <span>{item.name}</span>
                   </div>
-                );
-              })}
+                ))}
             </div>
           </div>
         </div>

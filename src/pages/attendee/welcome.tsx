@@ -12,16 +12,12 @@ const Register = () => {
             <p className="text-center mb-3">
               Para empear escanea tu credencial con la camara de tu dispositivo
             </p>
-            <button className="flex justify-center p-3 m-2 border rounded-md w-4/5 mx-auto hover:bg-black hover:text-white text-center">
+            <Link
+              to="/attendee/scan"
+              className="flex justify-center p-3 m-2 border rounded-md w-4/5 mx-auto hover:bg-black hover:text-white text-center"
+            >
               <CameraIcon width={24} className="mr-2" />
               Aqui
-            </button>
-            <p className="text-center">o</p>
-            <Link
-              to="/attendee/register"
-              className="block p-3 m-2 border rounded-md w-4/5 mx-auto hover:bg-black hover:text-white text-center"
-            >
-              Ingrese DNI
             </Link>
           </div>
         </div>

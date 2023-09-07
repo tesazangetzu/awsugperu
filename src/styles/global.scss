@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "./keyframes.scss";
+
 *{
   outline: none;
 }
@@ -56,6 +58,11 @@ a:hover,
   &-fluid{
     padding: 0 16px;
  }
+}
+
+.llamita{
+  animation: latidos .5s infinite;
+	transform-origin: center;
 }
 
 .bg-gradient-custom{
@@ -114,8 +121,9 @@ a:hover,
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+  padding: 3px;
   z-index: 0;
   span{
     color: #fff; 

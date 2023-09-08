@@ -70,6 +70,7 @@ a:hover,
 .llamita{
   animation: latidos .5s infinite;
 	transform-origin: center;
+  z-index: -1;
 }
 
 .bg-gradient-custom{
@@ -89,6 +90,7 @@ a:hover,
   background: linear-gradient(142deg, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
   border: none;
   border-radius: 50%;
+  font-size: 11px;
   position: relative;
   z-index: 0;
   span{
@@ -128,7 +130,7 @@ a:hover,
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 14px;
+  font-size: 11px;
   text-align: center;
   padding: 3px;
   z-index: 0;

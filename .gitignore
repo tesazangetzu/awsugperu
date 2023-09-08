@@ -6,3 +6,4 @@ src/gatsby-types.d.ts
 # dotenv environment variable files
 .env*
 !.env.example
+

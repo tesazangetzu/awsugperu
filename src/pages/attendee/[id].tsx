@@ -1,8 +1,8 @@
-import * as React from 'react'
-import { useState, useEffect } from 'react'
-import { Layout } from '../../components/Layout'
-import { Loader } from '../../components/Loader'
-import { ExclamationTriangleIcon } from '@heroicons/react/24/solid'
+import * as React from "react";
+import { useState, useEffect } from "react";
+import { Layout } from "../../components/Layout";
+import { Loader } from "../../components/Loader";
+import { renderErrorMessage } from "../../utils/renderErrorMessage";
 
 interface IParams {
   id: string;
@@ -14,112 +14,103 @@ interface IUser {
 }
 
 const Attendee = ({ params }: { params: IParams }) => {
-  const [user, setUser] = useState<IUser>()
-  const [qr, setQr] = useState<string>()
-  const [loader, setLoader] = useState<boolean>(true)
-  const [dni, setDni] = useState<string>()
-  const [error, setError] = useState<string>()
+  const [user, setUser] = useState<IUser>();
+  const [qr, setQr] = useState<string>();
+  const [loader, setLoader] = useState<boolean>(true);
+  const [dni, setDni] = useState<string>();
+  const [error, setError] = useState<string>();
 
   const handleSubmit = async () => {
     const login = async () => {
       try {
         const response = await fetch(`${process.env.API_URL}/login`, {
-          method: 'POST',
-          headers: { 'Content-type': 'application/json' },
+          method: "POST",
+          headers: { "Content-type": "application/json" },
           body: JSON.stringify({
             username: params.id,
-            password: dni
-          })
-        })
-        const res = await response.json()
+            password: dni,
+          }),
+        });
+        const res = await response.json();
         if (!res.status) {
-          setLoader(false)
-          setError(res.message)
+          setLoader(false);
+          setError(res.message);
         } else {
-          window.localStorage.setItem('user', res.data)
-          window.localStorage.setItem('attendee', params.id)
-          window.location.reload()
+          window.localStorage.setItem("user", res.data);
+          window.localStorage.setItem("attendee", params.id);
+          window.location.reload();
         }
       } catch (error) {
-        console.error('Error al obtener los datos:', error)
+        console.error("Error al obtener los datos:", error);
       }
-    }
+    };
 
-    login()
-  }
+    login();
+  };
 
   const handleLink = () => {
-    setLoader(true)
+    setLoader(true);
 
     const link = async () => {
       try {
         const response = await fetch(
           `${process.env.API_URL}/codes/${params.id}`,
           {
-            method: 'PATCH',
-            headers: { 'Content-type': 'application/json' },
+            method: "PATCH",
+            headers: { "Content-type": "application/json" },
             body: JSON.stringify({
               person: dni,
-              event: process.env.EVENT_ID
-            })
+              event: process.env.EVENT_ID,
+            }),
           }
-        )
-        const res = await response.json()
+        );
+        const res = await response.json();
         if (!res.status) {
-          setLoader(false)
-          setError(res.message)
+          setLoader(false);
+          setError(res.message);
         } else {
-          handleSubmit()
+          handleSubmit();
         }
       } catch (error) {
-        console.error('Error al obtener los datos:', error)
+        console.error("Error al obtener los datos:", error);
       }
-    }
+    };
 
-    link()
-  }
+    link();
+  };
 
   useEffect(() => {
     const getData = async () => {
       try {
         const response = await fetch(
           `${process.env.API_URL}/codes/${params.id}`
-        )
-        const res = await response.json()
+        );
+        const res = await response.json();
         if (res.status) {
-          setQr(res.data.image)
-          setUser(res.data.person)
-          setLoader(false)
+          setQr(res.data.image);
+          setUser(res.data.person);
+          localStorage.setItem("code", res.data.id);
+          setLoader(false);
         }
       } catch (error) {
-        console.error('Error al obtener los datos:', error)
+        console.error("Error al obtener los datos:", error);
       }
-    }
+    };
 
-    getData()
-  }, [params.id])
-
-  const renderErrorMessage = (message: string) => (
-    <p className="ff-cg--semibold text-red-500 text-[14px] mt-2 flex items-center">
-      <ExclamationTriangleIcon className="w-4 h-4 mr-1" />
-      {message}
-    </p>
-  )
+    getData();
+  }, [params.id]);
 
   return (
     <Layout>
       <section className="py-12">
-        {loader
-          ? (
+        {loader ? (
           <Loader
             open={loader}
             className="flex justify-center items-center hvh-custom"
           />
-            )
-          : (
+        ) : (
           <>
-            {!user
-              ? (
+            {!user ? (
               <div className="w-4/5 md:w-1/2 lg:w-1/4 m-auto p-5 border rounded-md">
                 <div>
                   <div className="flex justify-between items-center mb-8  ">
@@ -136,7 +127,7 @@ const Attendee = ({ params }: { params: IParams }) => {
                       className="border w-full mt-2"
                       onChange={(e) => setDni(e.target.value)}
                     />
-                    {error ? renderErrorMessage(error) : ''}
+                    {error ? renderErrorMessage(error) : ""}
                   </div>
                   <button
                     className="block border rounded-xl bg-gradient-custom text-white text-sm text-center px-3 py-1 shadow-md w-32 hover:bg-black m-auto"
@@ -146,8 +137,7 @@ const Attendee = ({ params }: { params: IParams }) => {
                   </button>
                 </div>
               </div>
-                )
-              : (
+            ) : (
               <div className="w-4/5 md:w-2/4 m-auto p-5 border rounded-md lg:flex lg:justify-between lg:items-center">
                 <div className="lg:w-2/4">
                   <div className="flex justify-between items-center mb-3">
@@ -191,14 +181,14 @@ const Attendee = ({ params }: { params: IParams }) => {
                   </div>
                 </div>
               </div>
-                )}
-          </>
             )}
+          </>
+        )}
       </section>
     </Layout>
-  )
-}
+  );
+};
 
-export default Attendee
+export default Attendee;
 
-export { Head } from '../index'
+export { Head } from "../index";

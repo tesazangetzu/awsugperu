@@ -1,7 +1,7 @@
-import * as React from 'react'
-import { useState, useEffect } from 'react'
-import { Layout } from '../../components/Layout'
-import { Loader } from '../../components/Loader'
+import * as React from "react";
+import { useState, useEffect } from "react";
+import { Layout } from "../../components/Layout";
+import { Loader } from "../../components/Loader";
 
 interface IUser {
   company: string;
@@ -10,42 +10,43 @@ interface IUser {
 }
 
 const Success = () => {
-  const [user, setUser] = useState<IUser>()
-  const [qr, setQr] = useState<string>()
-  const [loader, setLoader] = useState<boolean>(true)
+  const [user, setUser] = useState<IUser>();
+  const [qr, setQr] = useState<string>();
+  const [loader, setLoader] = useState<boolean>(true);
 
   useEffect(() => {
     const getData = async () => {
       try {
         const response = await fetch(
-          `${process.env.API_URL}/codes/${window.localStorage.getItem('code')}`
-        )
-        const res = await response.json()
+          `${process.env.API_URL}/codes/${window.localStorage.getItem("code")}`
+        );
+        const res = await response.json();
         if (res.status) {
-          setQr(res.data.image)
-          setUser(res.data.person)
-          setLoader(false)
+          setQr(res.data.image);
+          setUser(res.data.person);
+          setLoader(false);
         }
       } catch (error) {
-        console.error('Error al obtener los datos:', error)
+        console.error("Error al obtener los datos:", error);
       }
-    }
+    };
 
-    getData()
-  }, [])
+    getData();
+  }, []);
 
   return (
     <Layout>
       <section className="py-12">
-        {loader
-          ? (
+        {loader ? (
           <Loader open={loader} className="pt-6" />
-            )
-          : (
+        ) : (
           <div className="w-4/5 md:w-2/4 m-auto p-5 border rounded-md lg:flex lg:justify-between lg:items-center">
             <div className="p-3">
               <p className="text-xs text-center mb-2">
-                {JSON.parse(window.localStorage.getItem('feature') || '{}').name}
+                {
+                  JSON.parse(window.localStorage.getItem("feature") || "{}")
+                    .name
+                }
               </p>
               <div className="md:w-[196px] p-2 border-4 border-black rounded-2xl m-auto sm:w-full">
                 <img
@@ -81,12 +82,12 @@ const Success = () => {
               </div>
             </div>
           </div>
-            )}
+        )}
       </section>
     </Layout>
-  )
-}
+  );
+};
 
-export default Success
+export default Success;
 
-export { Head } from './login'
+export { Head } from "./login";

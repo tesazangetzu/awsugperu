@@ -43,6 +43,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ menu, setMenu }) => {
                 Dashboad
               </Link>
             </li>
+            <li>
+              <Link to="/admin/people" className="hover:bg-orange-200">
+                People
+              </Link>
+            </li>
           </ul>
         ) : (
           <ul className="py-3 [&>li]:p-2 [&>li>a]:p-2 [&>li>a]:w-full text-orange-900">

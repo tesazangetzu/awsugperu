@@ -26,8 +26,6 @@ const Success = () => {
           setQr(res.data.image);
           setUser(res.data.person);
           setLoader(false);
-        } else {
-          navigate("/404");
         }
       } catch (error) {
         console.error("Error al obtener los datos:", error);

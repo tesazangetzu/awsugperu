@@ -1,8 +1,9 @@
-import * as React from 'react'
-import { useState, useEffect } from 'react'
-import { QrReader } from 'react-qr-reader'
-import { Layout } from '../../components/Layout'
-import { navigate } from 'gatsby'
+import * as React from "react";
+import { useState, useEffect } from "react";
+import { QrReader } from "react-qr-reader";
+import { Layout } from "../../components/Layout";
+import { navigate } from "gatsby";
+import { renderErrorMessage } from "../../utils/renderErrorMessage";
 
 interface IListFeature {
   id: string;
@@ -11,12 +12,12 @@ interface IListFeature {
 }
 
 const Scan = () => {
-  const [selectedCam, setSelectedCam] = useState('environment')
-  const [selectedFeature, setSelectedFeature] = useState('-1')
-  const [listFeature, setListFeature] = useState<IListFeature[]>()
-  const [startScan, setStartScan] = useState(false)
-  const [loader, setLoader] = useState(false)
-  const [error, setError] = useState('')
+  const [selectedCam, setSelectedCam] = useState("environment");
+  const [selectedFeature, setSelectedFeature] = useState("-1");
+  const [listFeature, setListFeature] = useState<IListFeature[]>();
+  const [startScan, setStartScan] = useState(false);
+  const [loader, setLoader] = useState(false);
+  const [error, setError] = useState("");
 
   interface IReward {
     code: string;
@@ -24,60 +25,60 @@ const Scan = () => {
   }
 
   const handleSubmit = async (values: IReward) => {
-    setLoader(true)
+    setLoader(true);
 
     const fetchData = async () => {
       try {
         const response = await fetch(`${process.env.API_URL}/rewards`, {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-type': 'application/json',
-            Authorization: `Bearer ${window.localStorage.getItem('user')}`
+            "Content-type": "application/json",
+            Authorization: `Bearer ${window.localStorage.getItem("user")}`,
           },
-          body: JSON.stringify(values)
-        })
-        const res = await response.json()
+          body: JSON.stringify(values),
+        });
+        const res = await response.json();
 
         if (!res.status) {
-          setLoader(false)
-          setError(res.message)
+          setLoader(false);
+          setError(res.message);
         } else {
-          window.localStorage.setItem('code', values.code)
+          window.localStorage.setItem("code", values.code);
           window.localStorage.setItem(
-            'feature',
+            "feature",
             JSON.stringify(listFeature?.find((f) => (f.id = selectedFeature)))
-          )
-          navigate('/admin/success')
+          );
+          navigate("/admin/success");
         }
       } catch (error) {
-        console.error('Error al obtener los datos:', error)
+        console.error("Error al obtener los datos:", error);
       }
-    }
+    };
 
-    fetchData()
-  }
+    fetchData();
+  };
 
   useEffect(() => {
-    window.localStorage.removeItem('code')
-    window.localStorage.removeItem('feature')
+    window.localStorage.removeItem("code");
+    window.localStorage.removeItem("feature");
 
     const getData = async () => {
       try {
         const response = await fetch(`${process.env.API_URL}/me/features`, {
           headers: {
-            Accept: 'application/json',
-            Authorization: `Bearer ${window.localStorage.getItem('user')}`
-          }
-        })
-        const res = await response.json()
-        if (res.status) setListFeature(res.data)
+            Accept: "application/json",
+            Authorization: `Bearer ${window.localStorage.getItem("user")}`,
+          },
+        });
+        const res = await response.json();
+        if (res.status) setListFeature(res.data);
       } catch (error) {
-        console.error('Error al obtener los datos:', error)
+        console.error("Error al obtener los datos:", error);
       }
-    }
+    };
 
-    getData()
-  }, [])
+    getData();
+  }, []);
 
   return (
     <Layout>
@@ -87,8 +88,8 @@ const Scan = () => {
             <select
               className="block m-auto mb-5 px-5 py-3 border rounded-md"
               onChange={(e) => {
-                setSelectedFeature(e.target.value)
-                setStartScan(false)
+                setSelectedFeature(e.target.value);
+                setStartScan(false);
               }}
             >
               <option value="-1">Select Feature</option>
@@ -100,45 +101,57 @@ const Scan = () => {
                 ))}
             </select>
             <button
-              className="px-5 py-2 border rounded-md m-auto block hover:bg-black hover:text-white mb-6"
+              className="px-5 py-2 border rounded-md m-auto block hover:bg-black hover:text-white mb-6 disabled:cursor-not-allowed disabled::opacity-25 disabled:bg-red-700 disabled:text-white"
               onClick={() => setStartScan(!startScan)}
-              disabled={selectedFeature === '-1'}
+              disabled={selectedFeature === "-1"}
             >
-              {startScan && selectedFeature !== '-1'
-                ? 'Desactivar Camara'
-                : 'Activar Camara'}
+              {startScan && selectedFeature !== "-1"
+                ? "Desactivar Camara"
+                : "Activar Camara"}
             </button>
-            {startScan && selectedFeature !== '-1' && (
+            {startScan && selectedFeature !== "-1" && (
               <>
                 <select
                   className="block m-auto"
                   onChange={(e) => setSelectedCam(e.target.value)}
                 >
-                  <option value={'environment'}>Back Camera</option>
-                  <option value={'user'}>Front Camera</option>
+                  <option value={"environment"}>Back Camera</option>
+                  <option value={"user"}>Front Camera</option>
                 </select>
                 <QrReader
                   constraints={{ facingMode: selectedCam }}
                   onResult={(result) => {
                     if (result) {
-                      const arr = result?.getText().split('/')
-                      handleSubmit({
-                        code: arr[arr.length - 1],
-                        feature: selectedFeature
-                      })
+                      const arr = result?.getText().split("/");
+                      const code = arr[arr.length - 1];
+                      if (code.trim()) {
+                        handleSubmit({
+                          code,
+                          feature: selectedFeature,
+                        });
+                      } else {
+                        setError("Code not found");
+                      }
                     }
                   }}
                   className="sm:w-4/5 py-3 m-auto lg:w-2/4"
                 />
+                {error ? (
+                  <div className="w-full flex justify-center">
+                    {renderErrorMessage(error)}
+                  </div>
+                ) : (
+                  ""
+                )}
               </>
             )}
           </div>
         </div>
       </section>
     </Layout>
-  )
-}
+  );
+};
 
-export default Scan
+export default Scan;
 
-export { Head } from './login'
+export { Head } from "./login";

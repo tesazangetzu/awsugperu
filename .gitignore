@@ -8,3 +8,4 @@ src/gatsby-types.d.ts
 .env*
 !.env.example
 
+.DS_Store*

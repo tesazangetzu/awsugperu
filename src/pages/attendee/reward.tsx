@@ -44,7 +44,6 @@ const Reward = () => {
     };
 
     if (localStorageCustom("user")) {
-      console.log(window.localStorage.getItem("user"));
       getData();
     } else {
       setLoader(false);

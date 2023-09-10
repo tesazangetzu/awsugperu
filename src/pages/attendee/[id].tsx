@@ -91,6 +91,7 @@ const Attendee = ({ params }: { params: IParams }) => {
           setQr(res.data.image);
           setUser(res.data.person);
           localStorage.setItem("code", res.data.id);
+          if (res.data.person) localStorage.setItem("attendee", res.data.id);
           setLoader(false);
         } else {
           navigate("/404");

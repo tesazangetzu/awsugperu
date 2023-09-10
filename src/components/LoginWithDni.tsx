@@ -30,8 +30,8 @@ export const LoginWithDni = ({ code, setLoader }: ILoginWithDni) => {
           window.localStorage.setItem("user", res.data);
           window.location.reload();
         }
-      } catch (error) {
-        console.error("Error al obtener los datos:", error);
+      } catch (e: any) {
+        console.error("Error al obtener los datos:", e);
       }
     };
 

@@ -46,7 +46,7 @@ const Scan = () => {
           window.localStorage.setItem("code", values.code);
           window.localStorage.setItem(
             "feature",
-            JSON.stringify(listFeature?.find((f) => (f.id = selectedFeature)))
+            JSON.stringify(listFeature?.find((f) => f.id === selectedFeature))
           );
           navigate("/admin/success");
         }

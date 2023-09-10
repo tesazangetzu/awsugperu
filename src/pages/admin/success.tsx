@@ -2,6 +2,7 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import { Layout } from "../../components/Layout";
 import { Loader } from "../../components/Loader";
+import { navigate } from "gatsby";
 
 interface IUser {
   company: string;
@@ -25,6 +26,8 @@ const Success = () => {
           setQr(res.data.image);
           setUser(res.data.person);
           setLoader(false);
+        } else {
+          navigate("/404");
         }
       } catch (error) {
         console.error("Error al obtener los datos:", error);

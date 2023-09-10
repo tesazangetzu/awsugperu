@@ -36,7 +36,6 @@ const Scan = () => {
                       const arr = result?.getText().split('/')
                       navigate(`/attendee/${arr[arr.length - 1]}`)
                     }
-                    if (error) console.info(error)
                   }}
                   className="sm:w-4/5 py-3 m-auto lg:w-2/4"
                 />

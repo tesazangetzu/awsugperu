@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Layout } from "../../components/Layout";
 import { Loader } from "../../components/Loader";
 import { renderErrorMessage } from "../../utils/renderErrorMessage";
+import { navigate } from "gatsby";
 
 interface IParams {
   id: string;
@@ -91,6 +92,8 @@ const Attendee = ({ params }: { params: IParams }) => {
           setUser(res.data.person);
           localStorage.setItem("code", res.data.id);
           setLoader(false);
+        } else {
+          navigate("/404");
         }
       } catch (error) {
         console.error("Error al obtener los datos:", error);

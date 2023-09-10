@@ -26,6 +26,7 @@ const People = () => {
   const [loader, setLoader] = useState(true);
   const [listFeature, setListFeature] = useState<IListFeature[]>();
   const [selected, setSelected] = useState<string>("-1");
+  const [count, setCount] = useState<number>(0);
 
   const getdata = async () => {
     try {
@@ -38,6 +39,7 @@ const People = () => {
 
       if (res.status) {
         setData(res.data);
+        setCount(res.meta.total);
         setLoader(false);
       }
     } catch (error) {
@@ -83,6 +85,10 @@ const People = () => {
               />
               <div className="w-full sm:overflow-x-scroll md:overflow-x-auto py-3">
                 <table className="table-fixed lg;table-auto border border-slate-500 w-full">
+                  <caption className="caption-top text-xs text-left mb-2">
+                    Mostrando {count} registro
+                    {count > 1 || count === 0 ? `s` : ``}
+                  </caption>
                   <thead className="bg-slate-50">
                     <tr className="[&>th]:border [&>th]:border-slate-600">
                       <th className="w-5">N</th>

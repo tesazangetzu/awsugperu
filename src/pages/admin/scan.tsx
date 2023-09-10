@@ -101,7 +101,7 @@ const Scan = () => {
                 ))}
             </select>
             <button
-              className="px-5 py-2 border rounded-md m-auto block hover:bg-black hover:text-white mb-6 disabled:cursor-not-allowed disabled::opacity-25 disabled:bg-red-700 disabled:text-white"
+              className="px-5 py-2 border rounded-md m-auto block hover:bg-black hover:text-white mb-6 disabled:cursor-not-allowed disabled:bg-red-700 disabled:text-white"
               onClick={() => setStartScan(!startScan)}
               disabled={selectedFeature === "-1"}
             >

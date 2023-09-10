@@ -8,6 +8,10 @@
   outline: none;
 }
 
+*:disabled{
+  opacity: .30;
+}
+
 main {
   width: 100%;
   height: auto;

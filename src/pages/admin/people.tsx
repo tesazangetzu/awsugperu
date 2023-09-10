@@ -3,6 +3,7 @@ import { Layout } from "../../components/Layout";
 import { useState, useEffect } from "react";
 import { Loader } from "../../components/Loader";
 import { SelectFeature } from "../../components/SelectFeatures";
+import localStorageCustom from "../../utils/localStorageCustom";
 
 interface IData {
   first_name: string;
@@ -18,7 +19,7 @@ interface IListFeature {
 
 const headers = {
   Accept: "application/json",
-  Authorization: `Bearer ${window.localStorage.getItem("user")}`,
+  Authorization: `Bearer ${localStorageCustom("user")}`,
 };
 
 const People = () => {

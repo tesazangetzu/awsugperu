@@ -4,6 +4,7 @@ import { QrReader } from "react-qr-reader";
 import { Layout } from "../../components/Layout";
 import { navigate } from "gatsby";
 import { renderErrorMessage } from "../../utils/renderErrorMessage";
+import { CameraIcon } from "@heroicons/react/24/solid";
 
 interface IListFeature {
   id: string;
@@ -101,10 +102,11 @@ const Scan = () => {
                 ))}
             </select>
             <button
-              className="px-5 py-2 border rounded-md m-auto block hover:bg-black hover:text-white mb-6 disabled:cursor-not-allowed disabled:bg-red-700 disabled:text-white"
+              className="px-5 py-2 border rounded-md m-auto hover:bg-black hover:text-white mb-6 disabled:cursor-not-allowed disabled:bg-red-700 disabled:text-white flex"
               onClick={() => setStartScan(!startScan)}
               disabled={selectedFeature === "-1"}
             >
+              <CameraIcon width={22} className="mr-3" />
               {startScan && selectedFeature !== "-1"
                 ? "Desactivar Camara"
                 : "Activar Camara"}

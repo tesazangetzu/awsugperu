@@ -1,10 +1,12 @@
 import {
   ArrowLeftOnRectangleIcon,
+  CubeIcon,
   HomeIcon,
   LockClosedIcon,
   StarIcon,
   UserCircleIcon,
   UserIcon,
+  UsersIcon,
   XMarkIcon,
 } from "@heroicons/react/24/solid";
 import { Link, navigate } from "gatsby";
@@ -37,14 +39,22 @@ export const Sidebar: React.FC<SidebarProps> = ({ menu, setMenu }) => {
         </button>
         {localStorageCustom("role") &&
         localStorage.getItem("role") === "gate_keeper" ? (
-          <ul className="py-3 [&>li]:p-2 [&>li>a]:p-2 [&>li>a]:block [&>li>a]:w-full text-orange-900">
+          <ul className="py-3 [&>li]:p-2 [&>li>a]:p-2 [&>li>a]:w-full text-orange-900">
             <li>
-              <Link to="/admin/scan" className="hover:bg-orange-200">
+              <Link
+                to="/admin/scan"
+                className="hover:bg-orange-200 flex justify-start items-center"
+              >
+                <CubeIcon width={20} className="mr-2" />
                 Dashboad
               </Link>
             </li>
             <li>
-              <Link to="/admin/people" className="hover:bg-orange-200">
+              <Link
+                to="/admin/people"
+                className="hover:bg-orange-200 flex justify-start items-center"
+              >
+                <UsersIcon width={20} className="mr-2" />
                 People
               </Link>
             </li>

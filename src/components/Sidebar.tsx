@@ -58,6 +58,15 @@ export const Sidebar: React.FC<SidebarProps> = ({ menu, setMenu }) => {
                 People
               </Link>
             </li>
+            <li>
+              <Link
+                to="/admin/list-user"
+                className="hover:bg-orange-200 flex justify-start items-center"
+              >
+                <UserIcon width={20} className="mr-2" />
+                User
+              </Link>
+            </li>
           </ul>
         ) : (
           <ul className="py-3 [&>li]:p-2 [&>li>a]:p-2 [&>li>a]:w-full text-orange-900">

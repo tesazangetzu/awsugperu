@@ -82,7 +82,7 @@ const CreateUser = () => {
                             className="text-sm ff-cg--semibold"
                             htmlFor="username"
                           >
-                            Username:
+                            Usuario:
                           </label>
                         </div>
                         <Field
@@ -105,7 +105,7 @@ const CreateUser = () => {
                             className="text-sm ff-cg--semibold"
                             htmlFor="password"
                           >
-                            Password:
+                            Contraseña:
                           </label>
                         </div>
                         <Field

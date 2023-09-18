@@ -5,6 +5,8 @@ import logoWhite from "../../images/logo-white.png";
 import { Loader } from "../../components/Loader";
 import { LoginWithDni } from "../../components/LoginWithDni";
 import localStorageCustom from "../../utils/localStorageCustom";
+import { Button } from "../../components/Button";
+import { CurrencyDollarIcon } from "@heroicons/react/24/solid";
 
 interface IFunAndConnect {
   feature_id: string;
@@ -18,6 +20,9 @@ const Reward = () => {
   const [connect, setConnect] = useState<IFunAndConnect[]>();
   const [loader, setLoader] = useState<boolean>(true);
   const [user, setUser] = useState<string | boolean>(false);
+  const [status, setStatus] = useState<
+    string | "INCOMPLETE" | "READY" | "COMPLETED"
+  >();
 
   useEffect(() => {
     const getData = async () => {
@@ -35,6 +40,7 @@ const Reward = () => {
         if (res.status) {
           setFun(res.data.fun);
           setConnect(res.data.connect);
+          setStatus(res.data.status);
           setUser(window.localStorage.getItem("user") ?? "");
           setLoader(false);
         }
@@ -81,7 +87,7 @@ const Reward = () => {
                         fun.map((item, key) => (
                           <div
                             className={`hex ${
-                              item.status !== "UNVISITED" ? "alter" : ""
+                              item.status !== "UNVISITED" ? "" : "alter"
                             }`}
                             key={key}
                           >
@@ -95,12 +101,12 @@ const Reward = () => {
                   <div>
                     <h3 className="text-xl text-right">&lt; Connect /&gt;</h3>
                   </div>
-                  <div className="py-6 grid grid-cols-3 gap-3 sm:w-full lg:grid-cols-4 md:w-3/5 m-auto">
+                  <div className="py-6 grid grid-cols-3 gap-3 m-auto sm:w-full md:w-4/5 lg:grid-cols-4 ">
                     {connect &&
                       connect.map((item, key) => (
                         <div
                           className={`circle flex justify-center items-center ${
-                            item.status !== "UNVISITED" ? "white" : ""
+                            item.status !== "UNVISITED" ? "" : "white"
                           }`}
                           key={key}
                         >
@@ -110,6 +116,22 @@ const Reward = () => {
                   </div>
                 </div>
               </div>
+              {status !== "INCOMPLETE" ? (
+                <div className="flex justify-center">
+                  <Button
+                    text={
+                      status === "READY"
+                        ? "Puedes recoger tu premio"
+                        : "Premio recogido"
+                    }
+                    level="fourth"
+                  >
+                    <CurrencyDollarIcon width={20} className="mr-2" />
+                  </Button>
+                </div>
+              ) : (
+                ""
+              )}
               <div className="w-full flex justify-center items-center">
                 <img src={logoWhite} alt="logo" width={375} />
               </div>

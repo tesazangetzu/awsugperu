@@ -59,10 +59,10 @@ const ListUser = () => {
                 <thead className="bg-slate-50">
                   <tr className="[&>th]:border [&>th]:border-slate-600">
                     <th className="w-5">N</th>
-                    <th>Username</th>
+                    <th>Nombre de usuario </th>
                     <th>Rol</th>
                     <th>Fecha</th>
-                    <th className="w-20">Actions</th>
+                    <th className="w-20">Acciones</th>
                   </tr>
                 </thead>
                 {data ? (

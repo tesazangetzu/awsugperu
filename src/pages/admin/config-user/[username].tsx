@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import { Layout } from "../../../components/Layout";
 import { Button } from "../../../components/Button";
 import localStorageCustom from "../../../utils/localStorageCustom";
-import { Select, initTE } from "tw-elements";
+import { RenderMessage } from "../../../components/RenderMessage";
+import { navigate } from "gatsby-link";
 
 interface IParams {
   username: string;
@@ -24,6 +25,8 @@ const ConfigUser = ({ params }: { params: IParams }) => {
   const [data, setData] = useState<IOptions[]>([]);
   const [features, setFeatures] = useState<IFeatures[]>();
   const [userFeatures, setUserFeatures] = useState<IFeatures[]>();
+  const [error, setError] = useState<boolean>();
+  const [message, setMessage] = useState<string>();
 
   const getFeatures = async () => {
     try {
@@ -62,15 +65,6 @@ const ConfigUser = ({ params }: { params: IParams }) => {
     getUserFeatures();
   }, []);
 
-  useEffect(() => {
-    initTE({ Select });
-    if (userFeatures !== undefined && userFeatures?.length > 0) {
-      const multiSelect = document.querySelector("#multiSelection");
-      const multiSelectInstance = Select.getInstance(multiSelect);
-      multiSelectInstance?.setValue(userFeatures?.map((i: IOptions) => i.id));
-    }
-  }, [userFeatures]);
-
   const onChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedOptions = Array.from(
       event.target.selectedOptions,
@@ -98,7 +92,9 @@ const ConfigUser = ({ params }: { params: IParams }) => {
           }
         );
         const res = await response.json();
-        if (res.status) console.log(res);
+        if (res.status) {
+          setMessage(res.message);
+        }
       } catch (error) {
         console.error("Error al obtener los datos:", error);
       }
@@ -116,29 +112,38 @@ const ConfigUser = ({ params }: { params: IParams }) => {
               Configuración de usuario
             </h1>
             <form onSubmit={handleSubmit}>
-              <div className="flex flex-wrap mb-6 justify-center md:w-3/5 md:mx-auto md:justify-between">
-                <select
-                  id="multiSelection"
-                  multiple
-                  data-te-select-init
-                  data-te-select-placeholder="Zonas de evento"
-                  onChange={onChangeHandler}
-                  className="w-2/5 border"
-                >
-                  {features?.map((item, key) => (
-                    <option className="p-2 border" value={item.id} key={key}>
-                      {item.name}
-                    </option>
-                  ))}
-                </select>
-                <ul className="w-full md:w-2/5 border mt-8 md:mt-0">
-                  {data.map((item, key) => (
-                    <li className="p-2 border bg-lime-100" key={key}>
-                      {item.name}
-                    </li>
-                  ))}
-                </ul>
+              <div className="mb-6 sm:block sm:justify-center md:flex md:w-3/5 md:mx-auto md:justify-between">
+                <div className="sm:w-full md:w-2/5 ">
+                  <label className="block">Seleccionar</label>
+                  <select
+                    multiple
+                    onChange={onChangeHandler}
+                    className="w-full border"
+                  >
+                    {features?.map((item, key) => (
+                      <option
+                        className="p-2 border"
+                        value={item.id}
+                        key={key}
+                        selected={!!userFeatures?.find((i) => i.id === item.id)}
+                      >
+                        {item.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="sm:w-full md:w-2/5 mt-8 md:mt-0">
+                  <label className="mb-2">Seleccionado</label>
+                  <ul className="border">
+                    {data.map((item, key) => (
+                      <li className="p-2 border bg-lime-100" key={key}>
+                        {item.name}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
+              {message ? <RenderMessage message={message} error={error} /> : ""}
               <div className="flex justify-center items-center">
                 <Button text="Actualizar" />
                 <Button

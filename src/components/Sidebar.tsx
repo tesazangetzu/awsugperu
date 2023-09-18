@@ -138,11 +138,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ menu, setMenu }) => {
           <ul className="absolute bottom-0 py-3">
             <li className="p-2">
               <button
-                className="flex p-2 text-black w-32"
+                className="flex p-2 text-black items-center"
                 onClick={() => handleLogout()}
               >
                 <ArrowLeftOnRectangleIcon width={28} className="mr-3" />
-                Cerrar session
+                Cerrar sesion
               </button>
             </li>
           </ul>
@@ -150,6 +150,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ menu, setMenu }) => {
           ""
         )}
       </div>
-    </div>
+    </div>  
   );
 };

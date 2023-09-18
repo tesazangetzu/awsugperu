@@ -1,7 +1,7 @@
-import * as React from 'react'
-import { Header } from './Header'
-import { Footer } from './Footer'
-import { Banner } from './Banner'
+import * as React from "react";
+import { Header } from "./Header";
+import { Footer } from "./Footer";
+import { Banner } from "./Banner";
 
 export const Layout = ({ children }: any) => {
   return (
@@ -11,5 +11,5 @@ export const Layout = ({ children }: any) => {
       <main>{children}</main>
       <Footer />
     </>
-  )
-}
+  );
+};

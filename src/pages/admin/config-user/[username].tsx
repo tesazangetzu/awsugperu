@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Layout } from "../../../components/Layout";
 import { Button } from "../../../components/Button";
 import localStorageCustom from "../../../utils/localStorageCustom";
+import { Select, initTE } from "tw-elements";
 
 interface IParams {
   username: string;
@@ -61,6 +62,15 @@ const ConfigUser = ({ params }: { params: IParams }) => {
     getUserFeatures();
   }, []);
 
+  useEffect(() => {
+    initTE({ Select });
+    if (userFeatures !== undefined && userFeatures?.length > 0) {
+      const multiSelect = document.querySelector("#multiSelection");
+      const multiSelectInstance = Select.getInstance(multiSelect);
+      multiSelectInstance?.setValue(userFeatures?.map((i: IOptions) => i.id));
+    }
+  }, [userFeatures]);
+
   const onChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedOptions = Array.from(
       event.target.selectedOptions,
@@ -106,25 +116,22 @@ const ConfigUser = ({ params }: { params: IParams }) => {
               Configuración de usuario
             </h1>
             <form onSubmit={handleSubmit}>
-              <div className="flex justify-between mb-6 md:w-3/5 md:mx-auto">
+              <div className="flex flex-wrap mb-6 justify-center md:w-3/5 md:mx-auto md:justify-between">
                 <select
+                  id="multiSelection"
                   multiple
                   data-te-select-init
+                  data-te-select-placeholder="Zonas de evento"
                   onChange={onChangeHandler}
                   className="w-2/5 border"
                 >
                   {features?.map((item, key) => (
-                    <option
-                      className="p-2 border"
-                      value={item.id}
-                      key={key}
-                      selected={!!userFeatures?.find((i) => i.id === item.id)}
-                    >
+                    <option className="p-2 border" value={item.id} key={key}>
                       {item.name}
                     </option>
                   ))}
                 </select>
-                <ul className="w-2/5 border">
+                <ul className="w-full md:w-2/5 border mt-8 md:mt-0">
                   {data.map((item, key) => (
                     <li className="p-2 border bg-lime-100" key={key}>
                       {item.name}

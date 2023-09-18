@@ -46,7 +46,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ menu, setMenu }) => {
                 className="hover:bg-orange-200 flex justify-start items-center"
               >
                 <CubeIcon width={20} className="mr-2" />
-                Dashboad
+                Panel
               </Link>
             </li>
             <li>
@@ -55,7 +55,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ menu, setMenu }) => {
                 className="hover:bg-orange-200 flex justify-start items-center"
               >
                 <UsersIcon width={20} className="mr-2" />
-                People
+                Asistentes
               </Link>
             </li>
             <li>
@@ -64,7 +64,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ menu, setMenu }) => {
                 className="hover:bg-orange-200 flex justify-start items-center"
               >
                 <UserIcon width={20} className="mr-2" />
-                User
+                Voluntarios
               </Link>
             </li>
           </ul>
@@ -86,7 +86,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ menu, setMenu }) => {
                   className="hover:bg-orange-200 flex justify-start"
                 >
                   <UserCircleIcon width={20} className="mr-2" />
-                  Profile
+                  Perfil
                 </Link>
               </li>
             ) : (
@@ -100,7 +100,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ menu, setMenu }) => {
                   className="hover:bg-orange-200 flex justify-start"
                 >
                   <StarIcon width={20} className="mr-2" />
-                  Reward
+                  Premios
                 </Link>
               </li>
             ) : (
@@ -115,7 +115,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ menu, setMenu }) => {
                     className="hover:bg-orange-200 flex justify-start"
                   >
                     <UserIcon width={20} className="mr-2" />
-                    Usuario
+                    Asistente
                   </Link>
                 </li>
                 <li>
@@ -142,7 +142,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ menu, setMenu }) => {
                 onClick={() => handleLogout()}
               >
                 <ArrowLeftOnRectangleIcon width={28} className="mr-3" />
-                Logout
+                Cerrar session
               </button>
             </li>
           </ul>

@@ -68,13 +68,11 @@ const ConfigUser = ({ params }: { params: IParams }) => {
     );
 
     setData(selectedOptions);
-    console.log(data);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const features = data.map((i) => i.id);
-    console.log(features);
 
     const updateFeatures = async () => {
       try {

@@ -1,7 +1,7 @@
-import * as React from 'react'
-import { Link, type PageProps } from 'gatsby'
-import { Layout } from '../components/Layout'
-import { UserIcon, LockClosedIcon } from '@heroicons/react/24/solid'
+import * as React from "react";
+import { Link, type PageProps } from "gatsby";
+import { Layout } from "../components/Layout";
+import { UserIcon, LockClosedIcon } from "@heroicons/react/24/solid";
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
@@ -26,16 +26,16 @@ const IndexPage: React.FC<PageProps> = () => {
                 className="hover:bg-black hover:text-white"
               >
                 <UserIcon width={20} className="mr-2" />
-                Usuario
+                Asistente
               </Link>
             </div>
           </div>
         </div>
       </section>
     </Layout>
-  )
-}
+  );
+};
 
-export default IndexPage
+export default IndexPage;
 
-export const Head = () => <title>AWS UG Peru</title>
+export const Head = () => <title>AWS UG Peru</title>;

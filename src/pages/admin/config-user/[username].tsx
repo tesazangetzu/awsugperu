@@ -109,7 +109,7 @@ const ConfigUser = ({ params }: { params: IParams }) => {
               <div className="flex justify-between mb-6 md:w-3/5 md:mx-auto">
                 <select
                   multiple
-                  size={5}
+                  data-te-select-init
                   onChange={onChangeHandler}
                   className="w-2/5 border"
                 >

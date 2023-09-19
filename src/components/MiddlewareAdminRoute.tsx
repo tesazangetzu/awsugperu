@@ -9,7 +9,7 @@ interface AdminRouteProps {
 const MiddlewareAdminRoute: React.FC<AdminRouteProps> = ({ children }) => {
   const user = localStorageCustom("user");
   const role = localStorageCustom("role");
-  console.log(!user && role !== "ADMIN");
+
   if (!user && role !== "ADMIN") {
     navigate("/admin/login");
     return null;

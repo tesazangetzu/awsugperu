@@ -5,6 +5,7 @@ import { Layout } from "../../components/Layout";
 import { navigate } from "gatsby";
 import { renderErrorMessage } from "../../utils/renderErrorMessage";
 import { CameraIcon } from "@heroicons/react/24/solid";
+import MiddlewareAdminRoute from "../../components/MiddlewareAdminRoute";
 
 interface IListFeature {
   id: string;
@@ -83,77 +84,79 @@ const Scan = () => {
 
   return (
     <Layout>
-      <section>
-        <div className="container">
-          <div className="py-8">
-            <select
-              className="block m-auto mb-5 px-5 py-3 border rounded-md"
-              onChange={(e) => {
-                setSelectedFeature(e.target.value);
-                setStartScan(false);
-              }}
-            >
-              <option value="-1">Select Feature</option>
-              {listFeature &&
-                listFeature.map((item, key) => (
-                  <option value={item.id} key={key}>
-                    {item.name}
-                  </option>
-                ))}
-            </select>
-            <button
-              className="px-5 py-2 border rounded-md m-auto hover:bg-black hover:text-white mb-6 disabled:cursor-not-allowed disabled:bg-red-700 disabled:text-white flex"
-              onClick={() => setStartScan(!startScan)}
-              disabled={selectedFeature === "-1"}
-            >
-              <CameraIcon width={22} className="mr-3" />
-              {startScan && selectedFeature !== "-1"
-                ? "Desactivar Camara"
-                : "Activar Camara"}
-            </button>
-            {startScan && selectedFeature !== "-1" && (
-              <>
-                <select
-                  className="block m-auto"
-                  onChange={(e) => setSelectedCam(e.target.value)}
-                >
-                  <option value={"environment"}>Back Camera</option>
-                  <option value={"user"}>Front Camera</option>
-                </select>
-                <QrReader
-                  constraints={{ facingMode: selectedCam }}
-                  onResult={(result) => {
-                    if (result) {
-                      const arr = result?.getText().split("/");
-                      const code = arr[arr.length - 1];
-                      if (code.trim()) {
-                        handleSubmit({
-                          code,
-                          feature: selectedFeature,
-                        });
-                      } else {
-                        setError("Code not found");
+      <MiddlewareAdminRoute>
+        <section>
+          <div className="container">
+            <div className="py-8">
+              <select
+                className="block m-auto mb-5 px-5 py-3 border rounded-md"
+                onChange={(e) => {
+                  setSelectedFeature(e.target.value);
+                  setStartScan(false);
+                }}
+              >
+                <option value="-1">Select Feature</option>
+                {listFeature &&
+                  listFeature.map((item, key) => (
+                    <option value={item.id} key={key}>
+                      {item.name}
+                    </option>
+                  ))}
+              </select>
+              <button
+                className="px-5 py-2 border rounded-md m-auto hover:bg-black hover:text-white mb-6 disabled:cursor-not-allowed disabled:bg-red-700 disabled:text-white flex"
+                onClick={() => setStartScan(!startScan)}
+                disabled={selectedFeature === "-1"}
+              >
+                <CameraIcon width={22} className="mr-3" />
+                {startScan && selectedFeature !== "-1"
+                  ? "Desactivar Camara"
+                  : "Activar Camara"}
+              </button>
+              {startScan && selectedFeature !== "-1" && (
+                <>
+                  <select
+                    className="block m-auto"
+                    onChange={(e) => setSelectedCam(e.target.value)}
+                  >
+                    <option value={"environment"}>Back Camera</option>
+                    <option value={"user"}>Front Camera</option>
+                  </select>
+                  <QrReader
+                    constraints={{ facingMode: selectedCam }}
+                    onResult={(result) => {
+                      if (result) {
+                        const arr = result?.getText().split("/");
+                        const code = arr[arr.length - 1];
+                        if (code.trim()) {
+                          handleSubmit({
+                            code,
+                            feature: selectedFeature,
+                          });
+                        } else {
+                          setError("Code not found");
+                        }
                       }
-                    }
-                  }}
-                  className="sm:w-4/5 py-3 m-auto lg:w-2/4"
-                />
-                {error ? (
-                  <div className="w-full flex justify-center">
-                    {renderErrorMessage(error)}
-                  </div>
-                ) : (
-                  ""
-                )}
-              </>
-            )}
+                    }}
+                    className="sm:w-4/5 py-3 m-auto lg:w-2/4"
+                  />
+                  {error ? (
+                    <div className="w-full flex justify-center">
+                      {renderErrorMessage(error)}
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </>
+              )}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </MiddlewareAdminRoute>
     </Layout>
   );
 };
 
 export default Scan;
 
-export { Head } from "../login";
+export { Head } from "./login";

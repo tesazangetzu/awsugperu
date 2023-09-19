@@ -2,12 +2,12 @@ import * as React from "react";
 import * as Yup from "yup";
 import { navigate, type PageProps } from "gatsby";
 import { useState } from "react";
-import { Layout } from "../components/Layout";
-import { ExclamationTriangleIcon, UserIcon } from "@heroicons/react/24/solid";
+import { Layout } from "../../components/Layout";
+import { UserIcon } from "@heroicons/react/24/solid";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import { Loader } from "../components/Loader";
-import { renderErrorMessage } from "../utils/renderErrorMessage";
-import isUserAuthenticated from "../utils/validateToken";
+import { Loader } from "../../components/Loader";
+import { renderErrorMessage } from "../../utils/renderErrorMessage";
+import isUserAuthenticated from "../../utils/validateToken";
 
 interface ILogin {
   username: string;

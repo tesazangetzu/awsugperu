@@ -119,4 +119,4 @@ const People = () => {
 };
 export default People;
 
-export { Head } from "../login";
+export { Head } from "./login";

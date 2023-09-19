@@ -91,4 +91,4 @@ const Success = () => {
 
 export default Success;
 
-export { Head } from "../login";
+export { Head } from "./login";

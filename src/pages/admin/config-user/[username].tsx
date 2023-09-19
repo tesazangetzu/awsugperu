@@ -162,4 +162,4 @@ const ConfigUser = ({ params }: { params: IParams }) => {
 
 export default ConfigUser;
 
-export { Head } from "../../login";
+export { Head } from "../login";

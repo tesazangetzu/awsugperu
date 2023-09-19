@@ -156,4 +156,4 @@ const Scan = () => {
 
 export default Scan;
 
-export { Head } from "./login";
+export { Head } from "../login";

@@ -14,10 +14,7 @@ const IndexPage: React.FC<PageProps> = () => {
               <p>Comienza ahora</p>
             </div>
             <div className="[&>a]:flex [&>a]:p-3 [&>a]:m-2 [&>a]:w-4/5 [&>a]:mx-auto [&>a]:justify-center [&>a]:items-center [&>a]:border [&>a]:rounded-xl">
-              <Link
-                to="/admin/login"
-                className="hover:bg-black hover:text-white"
-              >
+              <Link to="/login" className="hover:bg-black hover:text-white">
                 <LockClosedIcon width={20} className="mr-2" />
                 Admin
               </Link>

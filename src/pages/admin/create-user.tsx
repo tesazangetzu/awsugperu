@@ -141,4 +141,4 @@ const CreateUser = () => {
 
 export default CreateUser;
 
-export { Head } from "./login";
+export { Head } from "../login";

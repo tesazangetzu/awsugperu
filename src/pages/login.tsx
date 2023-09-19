@@ -1,11 +1,13 @@
-import * as React from 'react'
-import * as Yup from 'yup'
-import { navigate, type PageProps } from 'gatsby'
-import { useState } from 'react'
-import { Layout } from '../../components/Layout'
-import { ExclamationTriangleIcon, UserIcon } from '@heroicons/react/24/solid'
-import { Formik, Field, Form, ErrorMessage } from 'formik'
-import { Loader } from '../../components/Loader'
+import * as React from "react";
+import * as Yup from "yup";
+import { navigate, type PageProps } from "gatsby";
+import { useState } from "react";
+import { Layout } from "../components/Layout";
+import { ExclamationTriangleIcon, UserIcon } from "@heroicons/react/24/solid";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import { Loader } from "../components/Loader";
+import { renderErrorMessage } from "../utils/renderErrorMessage";
+import isUserAuthenticated from "../utils/validateToken";
 
 interface ILogin {
   username: string;
@@ -13,57 +15,48 @@ interface ILogin {
 }
 
 const validationSchema = Yup.object().shape({
-  username: Yup.string().required('Email address is required'),
-  password: Yup.string().required('Password is required')
-})
+  username: Yup.string().required("Email address is required"),
+  password: Yup.string().required("Password is required"),
+});
 
 const Login: React.FC<PageProps> = () => {
-  const [loader, setLoader] = useState<boolean>(false)
-  const [error, setError] = useState<string | null>(null)
+  const [loader, setLoader] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (values: ILogin) => {
-    setLoader(true)
+    setLoader(true);
 
     const fetchData = async () => {
       try {
         const response = await fetch(`${process.env.API_URL}/login`, {
-          method: 'POST',
-          headers: { 'Content-type': 'application/json' },
-          body: JSON.stringify(values)
-        })
-        const res = await response.json()
+          method: "POST",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify(values),
+        });
+        const res = await response.json();
         if (!res.status) {
-          setLoader(false)
-          setError(res.message)
+          setLoader(false);
+          setError(res.message);
         } else {
-          window.localStorage.setItem('user', res.data)
-          window.localStorage.setItem('role', 'gate_keeper')
-          navigate('/admin/scan')
+          window.localStorage.setItem("user", res.data);
+          isUserAuthenticated();
+          navigate("/admin/scan");
         }
       } catch (error) {
-        console.error('Error al obtener los datos:', error)
+        console.error("Error al obtener los datos:", error);
       }
-    }
+    };
 
-    fetchData()
-  }
-
-  const renderErrorMessage = (message: string) => (
-    <p className="ff-cg--semibold text-red-500 text-[14px] mt-2 flex items-center">
-      <ExclamationTriangleIcon className="w-4 h-4 mr-1" />
-      {message}
-    </p>
-  )
+    fetchData();
+  };
 
   return (
     <Layout>
       <section>
         <div className="container">
-          {loader
-            ? (
+          {loader ? (
             <Loader open={loader} className="pt-20" />
-              )
-            : (
+          ) : (
             <div className="sm:w-4/5 md:w-96 m-auto text-center pt-10">
               <h2 className="mb-4">Admin re:wards</h2>
               <div className="flex justify-center items-center mb-4">
@@ -72,7 +65,7 @@ const Login: React.FC<PageProps> = () => {
 
               <div className="mb-4">
                 <Formik
-                  initialValues={{ username: '', password: '' }}
+                  initialValues={{ username: "", password: "" }}
                   validationSchema={validationSchema}
                   onSubmit={handleSubmit}
                 >
@@ -81,7 +74,7 @@ const Login: React.FC<PageProps> = () => {
                     errors,
                     values,
                     handleSubmit,
-                    handleChange
+                    handleChange,
                   }) => (
                     <Form className="px-4">
                       <div className="mb-6">
@@ -95,7 +88,7 @@ const Login: React.FC<PageProps> = () => {
                         </div>
                         <Field
                           className={`w-full bg-gray-100 placeholder:text-[#000000] p-[10px] focus:outline-none rounded-xl mt-2 ${
-                            errors.username ? 'border border-red-500' : ''
+                            errors.username ? "border border-red-500" : ""
                           }`}
                           id="username"
                           name="username"
@@ -119,7 +112,7 @@ const Login: React.FC<PageProps> = () => {
                         </div>
                         <Field
                           className={`w-full bg-gray-100 placeholder:text-[#000000] p-[10px] focus:outline-none rounded-xl mt-2 ${
-                            errors.password ? 'border border-red-500' : ''
+                            errors.password ? "border border-red-500" : ""
                           }`}
                           id="password"
                           name="password"
@@ -131,7 +124,7 @@ const Login: React.FC<PageProps> = () => {
                           name="password"
                           render={(msg: string) => renderErrorMessage(msg)}
                         />
-                        {error !== null ? renderErrorMessage(error) : ''}
+                        {error !== null ? renderErrorMessage(error) : ""}
                       </div>
                       <button className="flex justify-center p-3 m-2 border rounded-md w-36 mx-auto hover:bg-black hover:text-white text-center">
                         Login
@@ -141,13 +134,13 @@ const Login: React.FC<PageProps> = () => {
                 </Formik>
               </div>
             </div>
-              )}
+          )}
         </div>
       </section>
     </Layout>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
 
-export const Head = () => <title>AWS UG Peru Admin</title>
+export const Head = () => <title>AWS UG Peru Admin</title>;

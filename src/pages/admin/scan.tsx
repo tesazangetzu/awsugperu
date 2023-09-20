@@ -6,6 +6,7 @@ import { navigate } from "gatsby";
 import { renderErrorMessage } from "../../utils/renderErrorMessage";
 import { CameraIcon } from "@heroicons/react/24/solid";
 import MiddlewareAdminRoute from "../../components/middlewares/MiddlewareAdminRoute";
+import localStorageCustom from "../../utils/localStorageCustom";
 
 interface IListFeature {
   id: string;
@@ -35,7 +36,7 @@ const Scan = () => {
           method: "POST",
           headers: {
             "Content-type": "application/json",
-            Authorization: `Bearer ${window.localStorage.getItem("user")}`,
+            Authorization: `Bearer ${localStorageCustom("user")}`,
           },
           body: JSON.stringify(values),
         });
@@ -45,11 +46,13 @@ const Scan = () => {
           setLoader(false);
           setError(res.message);
         } else {
-          window.localStorage.setItem("code", values.code);
-          window.localStorage.setItem(
-            "feature",
-            JSON.stringify(listFeature?.find((f) => f.id === selectedFeature))
-          );
+          if (typeof window !== 'undefined'){
+            window.localStorage.setItem("code", values.code);
+            window.localStorage.setItem(
+              "feature",
+              JSON.stringify(listFeature?.find((f) => f.id === selectedFeature))
+            );  
+          }
           navigate("/admin/success");
         }
       } catch (error) {
@@ -61,6 +64,10 @@ const Scan = () => {
   };
 
   useEffect(() => {
+    if(typeof window === 'undefined'){
+      return
+    }
+
     window.localStorage.removeItem("code");
     window.localStorage.removeItem("feature");
 
@@ -69,7 +76,7 @@ const Scan = () => {
         const response = await fetch(`${process.env.API_URL}/me/features`, {
           headers: {
             Accept: "application/json",
-            Authorization: `Bearer ${window.localStorage.getItem("user")}`,
+            Authorization: `Bearer ${localStorageCustom("user")}`,
           },
         });
         const res = await response.json();

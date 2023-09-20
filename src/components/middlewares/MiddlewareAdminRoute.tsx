@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { navigate } from "gatsby";
-import localStorageCustom from "../utils/localStorageCustom";
+import localStorageCustom from "../../utils/localStorageCustom";
 
 interface AdminRouteProps {
   children: ReactNode;

@@ -1,6 +1,7 @@
 import {
   ArrowLeftOnRectangleIcon,
   CubeIcon,
+  GiftIcon,
   HomeIcon,
   LockClosedIcon,
   StarIcon,
@@ -18,11 +19,107 @@ interface SidebarProps {
   setMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+const linkStyle = "flex justify-start items-center hover:bg-orange-200";
+
 export const Sidebar: React.FC<SidebarProps> = ({ menu, setMenu }) => {
   const handleLogout = () => {
     localStorage.clear();
     navigate("/");
   };
+
+  const admin = (
+    <ul className="py-3 [&>li]:p-2 [&>li>a]:p-2 [&>li>a]:w-full text-orange-900">
+      <li>
+        <Link to="/admin/scan" className={linkStyle}>
+          <CubeIcon width={20} className="mr-2" />
+          Panel
+        </Link>
+      </li>
+      <li>
+        <Link to="/admin/people" className={linkStyle}>
+          <UsersIcon width={20} className="mr-2" />
+          Asistentes
+        </Link>
+      </li>
+      <li>
+        <Link to="/admin/list-user" className={linkStyle}>
+          <UserIcon width={20} className="mr-2" />
+          Voluntarios
+        </Link>
+      </li>
+      <li>
+        <Link to="/admin/award" className={linkStyle}>
+          <GiftIcon width={20} className="mr-2" />
+          Premiación
+        </Link>
+      </li>
+    </ul>
+  );
+
+  const profile = (
+    <li>
+      <Link
+        to={`/attendee/${localStorageCustom("attendee")}`}
+        className={linkStyle}
+      >
+        <UserCircleIcon width={20} className="mr-2" />
+        Perfil
+      </Link>
+    </li>
+  );
+
+  const reward = (
+    <li>
+      <Link to={"/attendee/reward"} className={linkStyle}>
+        <StarIcon width={20} className="mr-2" />
+        Premios
+      </Link>
+    </li>
+  );
+
+  const defaultLinks = (
+    <>
+      <li>
+        <Link to="/attendee/welcome" className={linkStyle}>
+          <UserIcon width={20} className="mr-2" />
+          Asistente
+        </Link>
+      </li>
+      <li>
+        <Link to="/admin/login" className={linkStyle}>
+          <LockClosedIcon width={20} className="mr-2" />
+          Admin
+        </Link>
+      </li>
+    </>
+  );
+
+  const attendee = (
+    <ul className="py-3 [&>li]:p-2 [&>li>a]:p-2 [&>li>a]:w-full text-orange-900">
+      <li>
+        <Link to="/" className={linkStyle}>
+          <HomeIcon width={20} className="mr-2" />
+          Inicio
+        </Link>
+      </li>
+      {localStorageCustom("attendee") ? profile : ""}
+      {localStorageCustom("attendee") || localStorageCustom("code")
+        ? reward
+        : ""}
+      {!localStorageCustom("code") ? defaultLinks : ""}
+    </ul>
+  );
+
+  const gateKeeper = (
+    <ul className="py-3 [&>li]:p-2 [&>li>a]:p-2 [&>li>a]:w-full text-orange-900">
+      <li>
+        <Link to="/admin/scan" className={linkStyle}>
+          <CubeIcon width={20} className="mr-2" />
+          Panel
+        </Link>
+      </li>
+    </ul>
+  );
 
   return (
     <div
@@ -37,102 +134,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ menu, setMenu }) => {
         >
           <XMarkIcon width={28} />
         </button>
-        {localStorageCustom("role") &&
-        localStorage.getItem("role") === "gate_keeper" ? (
-          <ul className="py-3 [&>li]:p-2 [&>li>a]:p-2 [&>li>a]:w-full text-orange-900">
-            <li>
-              <Link
-                to="/admin/scan"
-                className="hover:bg-orange-200 flex justify-start items-center"
-              >
-                <CubeIcon width={20} className="mr-2" />
-                Panel
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/admin/people"
-                className="hover:bg-orange-200 flex justify-start items-center"
-              >
-                <UsersIcon width={20} className="mr-2" />
-                Asistentes
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/admin/list-user"
-                className="hover:bg-orange-200 flex justify-start items-center"
-              >
-                <UserIcon width={20} className="mr-2" />
-                Voluntarios
-              </Link>
-            </li>
-          </ul>
-        ) : (
-          <ul className="py-3 [&>li]:p-2 [&>li>a]:p-2 [&>li>a]:w-full text-orange-900">
-            <li>
-              <Link
-                to="/"
-                className="hover:bg-orange-200 flex justify-start items-center"
-              >
-                <HomeIcon width={20} className="mr-2" />
-                Inicio
-              </Link>
-            </li>
-            {localStorageCustom("attendee") ? (
-              <li>
-                <Link
-                  to={`/attendee/${localStorage.getItem("attendee")}`}
-                  className="hover:bg-orange-200 flex justify-start"
-                >
-                  <UserCircleIcon width={20} className="mr-2" />
-                  Perfil
-                </Link>
-              </li>
-            ) : (
-              ""
-            )}
 
-            {localStorageCustom("attendee") || localStorageCustom("code") ? (
-              <li>
-                <Link
-                  to={"/attendee/reward"}
-                  className="hover:bg-orange-200 flex justify-start"
-                >
-                  <StarIcon width={20} className="mr-2" />
-                  Premios
-                </Link>
-              </li>
-            ) : (
-              ""
-            )}
+        {localStorageCustom("role") === "ADMIN" ? admin : ""}
 
-            {!localStorageCustom("code") ? (
-              <>
-                <li>
-                  <Link
-                    to="/attendee/welcome"
-                    className="hover:bg-orange-200 flex justify-start"
-                  >
-                    <UserIcon width={20} className="mr-2" />
-                    Asistente
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/admin/login"
-                    className="hover:bg-orange-200 flex justify-start"
-                  >
-                    <LockClosedIcon width={20} className="mr-2" />
-                    Admin
-                  </Link>
-                </li>
-              </>
-            ) : (
-              ""
-            )}
-          </ul>
-        )}
+        {localStorageCustom("role") === "GATE_KEEPER" ? gateKeeper : ""}
+
+        {!localStorageCustom("role") ? attendee : ""}
 
         {localStorageCustom("user") ? (
           <ul className="absolute bottom-0 py-3">
@@ -150,6 +157,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ menu, setMenu }) => {
           ""
         )}
       </div>
-    </div>  
+    </div>
   );
 };

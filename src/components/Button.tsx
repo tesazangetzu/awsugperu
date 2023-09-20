@@ -6,6 +6,7 @@ interface IButton {
   to?: string | null;
   level?: "first" | "second" | "third" | "fourth";
   children?: any;
+  onClick?: () => void;
 }
 
 const levels = {
@@ -22,8 +23,9 @@ export const Button = ({
   to = null,
   level = "first",
   children,
+  onClick,
 }: IButton) => {
-  const className = `flex justify-center items-center p-3 m-2 border rounded-md min-w-[144px] text-center ${levels[level]}`;
+  const className = `flex justify-center items-center p-3 m-2 border rounded-md md:min-w-[144px] text-center ${levels[level]}`;
   return (
     <>
       {to ? (
@@ -32,7 +34,7 @@ export const Button = ({
           {text}
         </Link>
       ) : (
-        <button className={className}>
+        <button className={className} onClick={onClick}>
           {children}
           {text}
         </button>

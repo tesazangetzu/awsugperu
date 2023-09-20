@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Layout } from "../../components/Layout";
 import localStorageCustom from "../../utils/localStorageCustom";
 import { Link } from "gatsby";
-import { CogIcon, PlusCircleIcon } from "@heroicons/react/24/solid";
+import { CogIcon, KeyIcon, PlusCircleIcon } from "@heroicons/react/24/solid";
 
 interface IData {
   username: string;
@@ -71,7 +71,9 @@ const ListUser = () => {
                       <tr key={key} className="[&>td]:p-2">
                         <td className="w-5">{key + 1}</td>
                         <td>{item.username}</td>
-                        <td>{item.role}</td>
+                        <td>
+                          <KeyIcon width={18} className="m-auto" />
+                        </td>
                         <td>{item.created_at}</td>
                         <td>
                           <div className="flex justify-center items-center">

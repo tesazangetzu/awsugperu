@@ -5,7 +5,7 @@ import { Layout } from "../../components/Layout";
 import { navigate } from "gatsby";
 import { renderErrorMessage } from "../../utils/renderErrorMessage";
 import { CameraIcon } from "@heroicons/react/24/solid";
-import MiddlewareAdminRoute from "../../components/MiddlewareAdminRoute";
+import MiddlewareAdminRoute from "../../components/middlewares/MiddlewareAdminRoute";
 
 interface IListFeature {
   id: string;

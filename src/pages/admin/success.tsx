@@ -2,7 +2,7 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import { Layout } from "../../components/Layout";
 import { Loader } from "../../components/Loader";
-import { navigate } from "gatsby";
+import localStorageCustom from "../../utils/localStorageCustom";
 
 interface IUser {
   company: string;
@@ -19,7 +19,7 @@ const Success = () => {
     const getData = async () => {
       try {
         const response = await fetch(
-          `${process.env.API_URL}/codes/${window.localStorage.getItem("code")}`
+          `${process.env.API_URL}/codes/${localStorageCustom("code")}`
         );
         const res = await response.json();
         if (res.status) {

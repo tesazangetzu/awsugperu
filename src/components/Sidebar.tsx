@@ -36,13 +36,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ menu, setMenu }) => {
         </Link>
       </li>
       <li>
-        <Link to="/admin/people" className={linkStyle}>
+        <Link to="/admin/attendee" className={linkStyle}>
           <UsersIcon width={20} className="mr-2" />
           Asistentes
         </Link>
       </li>
       <li>
-        <Link to="/admin/list-user" className={linkStyle}>
+        <Link to="/admin/list-gate-keeper" className={linkStyle}>
           <UserIcon width={20} className="mr-2" />
           Voluntarios
         </Link>
@@ -116,6 +116,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ menu, setMenu }) => {
         <Link to="/admin/scan" className={linkStyle}>
           <CubeIcon width={20} className="mr-2" />
           Panel
+        </Link>
+      </li>
+      <li>
+        <Link to="/admin/list-gate-keeper" className={linkStyle}>
+          <UsersIcon width={20} className="mr-2" />
+          Asistentes
         </Link>
       </li>
     </ul>

@@ -5,6 +5,7 @@ import { Button } from "../../../components/Button";
 import localStorageCustom from "../../../utils/localStorageCustom";
 import { RenderMessage } from "../../../components/RenderMessage";
 import { navigate } from "gatsby-link";
+import MiddlewareAdminRoute from "../../../components/middlewares/MiddlewareAdminRoute";
 
 interface IParams {
   username: string;
@@ -105,6 +106,7 @@ const ConfigUser = ({ params }: { params: IParams }) => {
 
   return (
     <Layout>
+      <MiddlewareAdminRoute>
       <section>
         <div className="container">
           <div className="py-10">
@@ -156,6 +158,7 @@ const ConfigUser = ({ params }: { params: IParams }) => {
           </div>
         </div>
       </section>
+      </MiddlewareAdminRoute>
     </Layout>
   );
 };

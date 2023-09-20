@@ -7,6 +7,7 @@ import { CameraIcon } from "@heroicons/react/24/solid";
 import localStorageCustom from "../../utils/localStorageCustom";
 import ModalAward from "../../components/ModalAward";
 import { navigate } from "gatsby";
+import MiddlewareAdminRoute from "../../components/middlewares/MiddlewareAdminRoute";
 
 const Award = () => {
   const [selectedCam, setSelectedCam] = useState<string>("environment");
@@ -42,59 +43,61 @@ const Award = () => {
 
   return (
     <Layout>
-      <section>
-        <div className="container">
-          <div className="py-8">
-            <button
-              className="px-5 py-2 border rounded-md m-auto hover:bg-black hover:text-white mb-6 flex"
-              onClick={() => setStartScan(!startScan)}
-            >
-              <CameraIcon width={22} className="mr-3" />
-              {startScan ? "Desactivar Camara" : "Activar Camara"}
-            </button>
-            {startScan && (
-              <>
-                <select
-                  className="block m-auto"
-                  onChange={(e) => setSelectedCam(e.target.value)}
-                >
-                  <option value={"environment"}>Back Camera</option>
-                  <option value={"user"}>Front Camera</option>
-                </select>
-                <QrReader
-                  constraints={{ facingMode: selectedCam }}
-                  onResult={(result) => {
-                    if (result) {
-                      const arr = result?.getText().split("/");
-                      const code = arr[arr.length - 1];
-                      if (code.trim()) {
-                        setCode(code);
-                        setStartScan(!startScan);
-                        setIsModalOpen(!isModalOpen);
-                      } else {
-                        setError("Code not found");
+      <MiddlewareAdminRoute>
+        <section>
+          <div className="container">
+            <div className="py-8">
+              <button
+                className="px-5 py-2 border rounded-md m-auto hover:bg-black hover:text-white mb-6 flex"
+                onClick={() => setStartScan(!startScan)}
+              >
+                <CameraIcon width={22} className="mr-3" />
+                {startScan ? "Desactivar Camara" : "Activar Camara"}
+              </button>
+              {startScan && (
+                <>
+                  <select
+                    className="block m-auto"
+                    onChange={(e) => setSelectedCam(e.target.value)}
+                  >
+                    <option value={"environment"}>Back Camera</option>
+                    <option value={"user"}>Front Camera</option>
+                  </select>
+                  <QrReader
+                    constraints={{ facingMode: selectedCam }}
+                    onResult={(result) => {
+                      if (result) {
+                        const arr = result?.getText().split("/");
+                        const code = arr[arr.length - 1];
+                        if (code.trim()) {
+                          setCode(code);
+                          setStartScan(!startScan);
+                          setIsModalOpen(!isModalOpen);
+                        } else {
+                          setError("Code not found");
+                        }
                       }
-                    }
-                  }}
-                  className="sm:w-4/5 py-3 m-auto lg:w-2/4"
-                />
-                {error ? (
-                  <div className="w-full flex justify-center">
-                    {renderErrorMessage(error)}
-                  </div>
-                ) : (
-                  ""
-                )}
-              </>
-            )}
-            <ModalAward
-              isOpen={isModalOpen}
-              onClose={() => setIsModalOpen(!isModalOpen)}
-              handleSubmit={handleSubmit}
-            ></ModalAward>
+                    }}
+                    className="sm:w-4/5 py-3 m-auto lg:w-2/4"
+                  />
+                  {error ? (
+                    <div className="w-full flex justify-center">
+                      {renderErrorMessage(error)}
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </>
+              )}
+              <ModalAward
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(!isModalOpen)}
+                handleSubmit={handleSubmit}
+              ></ModalAward>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </MiddlewareAdminRoute>
     </Layout>
   );
 };

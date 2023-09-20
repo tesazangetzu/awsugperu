@@ -22,7 +22,7 @@ const headers = {
   Authorization: `Bearer ${localStorageCustom("user")}`,
 };
 
-const People = () => {
+const Attendee = () => {
   const [data, setData] = useState<IData[]>();
   const [loader, setLoader] = useState(true);
   const [listFeature, setListFeature] = useState<IListFeature[]>();
@@ -117,6 +117,6 @@ const People = () => {
     </Layout>
   );
 };
-export default People;
+export default Attendee;
 
 export { Head } from "./login";

@@ -4,13 +4,21 @@ import localStorageCustom from "../../utils/localStorageCustom";
 
 interface AdminRouteProps {
   children: ReactNode;
+  allowGateKeeper?: boolean;
 }
 
-const MiddlewareAdminRoute: React.FC<AdminRouteProps> = ({ children }) => {
+const MiddlewareAdminRoute: React.FC<AdminRouteProps> = ({
+  children,
+  allowGateKeeper,
+}) => {
   const user = localStorageCustom("user");
   const role = localStorageCustom("role");
 
-  if (!user && role !== "ADMIN") {
+  if (
+    !user &&
+    role !== "ADMIN" &&
+    (!allowGateKeeper || role !== "GATE_KEEPER")
+  ) {
     navigate("/admin/login");
     return null;
   }

@@ -84,7 +84,7 @@ const Scan = () => {
 
   return (
     <Layout>
-      <MiddlewareAdminRoute>
+      <MiddlewareAdminRoute allowGateKeeper={true}>
         <section>
           <div className="container">
             <div className="py-8">

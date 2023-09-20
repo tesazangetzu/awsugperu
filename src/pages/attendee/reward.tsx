@@ -30,7 +30,7 @@ const Reward = () => {
         "Content-Type": "application/json",
       };
       if (localStorageCustom("user"))
-        headers.Authorization = `Bearer ${window.localStorage.getItem("user")}`;
+        headers.Authorization = `Bearer ${localStorageCustom("user")}`;
 
       try {
         const response = await fetch(`${process.env.API_URL}/me/rewards`, {

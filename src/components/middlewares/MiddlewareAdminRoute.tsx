@@ -11,6 +11,7 @@ const MiddlewareAdminRoute: React.FC<AdminRouteProps> = ({
   children,
   allowGateKeeper,
 }) => {
+  if (typeof window === "undefined") return;
   const user = localStorageCustom("user");
   const role = localStorageCustom("role");
 

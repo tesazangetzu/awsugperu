@@ -119,7 +119,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ menu, setMenu }) => {
         </Link>
       </li>
       <li>
-        <Link to="/admin/list-gate-keeper" className={linkStyle}>
+        <Link to="/admin/attendee" className={linkStyle}>
           <UsersIcon width={20} className="mr-2" />
           Asistentes
         </Link>

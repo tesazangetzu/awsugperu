@@ -41,7 +41,7 @@ const ListGateKeeper = () => {
 
   return (
     <Layout>
-      <MiddlewareAdminRoute allowGateKeeper={true}>
+      <MiddlewareAdminRoute>
         <section>
           <div className="container">
             <div className="py-10">

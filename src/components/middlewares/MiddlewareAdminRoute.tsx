@@ -18,7 +18,7 @@ const MiddlewareAdminRoute: React.FC<AdminRouteProps> = ({
     !user ||
     (role !== "ADMIN" && (!allowGateKeeper || role !== "GATE_KEEPER"))
   ) {
-    localStorage.clear();
+    typeof window !== "undefined" ? localStorage.clear() : false;
     navigate("/admin/login");
     return null;
   }

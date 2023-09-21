@@ -15,10 +15,10 @@ const MiddlewareAdminRoute: React.FC<AdminRouteProps> = ({
   const role = localStorageCustom("role");
 
   if (
-    !user &&
-    role !== "ADMIN" &&
-    (!allowGateKeeper || role !== "GATE_KEEPER")
+    !user ||
+    (role !== "ADMIN" && (!allowGateKeeper || role !== "GATE_KEEPER"))
   ) {
+    localStorage.clear();
     navigate("/admin/login");
     return null;
   }

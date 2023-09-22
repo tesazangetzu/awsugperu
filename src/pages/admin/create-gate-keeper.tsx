@@ -44,7 +44,7 @@ const CreateUser = () => {
           setLoader(false);
           setError(res.message);
         } else {
-          navigate("/admin/list-user");
+          navigate("/admin/list-gate-keeper");
         }
       } catch (error) {
         console.error("Error al obtener los datos:", error);
@@ -116,7 +116,7 @@ const CreateUser = () => {
                             }`}
                             id="password"
                             name="password"
-                            type="text"
+                            type="password"
                             onChange={handleChange}
                           />
                           <ErrorMessage
@@ -127,7 +127,10 @@ const CreateUser = () => {
                         </div>
                         <div className="flex justify-between">
                           <Button text="Crear" />
-                          <Button text="Cancelar" to={"/admin/list-user"} />
+                          <Button
+                            text="Cancelar"
+                            to={"/admin/list-gate-keeper"}
+                          />
                         </div>
                       </Form>
                     )}

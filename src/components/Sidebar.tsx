@@ -1,6 +1,7 @@
 import {
   ArrowLeftOnRectangleIcon,
   CubeIcon,
+  FireIcon,
   GiftIcon,
   HomeIcon,
   LockClosedIcon,
@@ -51,6 +52,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ menu, setMenu }) => {
         <Link to="/admin/award" className={linkStyle}>
           <GiftIcon width={20} className="mr-2" />
           Premiación
+        </Link>
+      </li>
+      <li>
+        <Link to="/admin/list-people" className={linkStyle}>
+          <FireIcon width={20} className="mr-2" />
+          People
         </Link>
       </li>
     </ul>

@@ -157,7 +157,7 @@ const ConfigUser = ({ params }: { params: IParams }) => {
                   <Button text="Actualizar" />
                   <Button
                     text="Cancelar"
-                    to={"/admin/list-user"}
+                    to={"/admin/list-gate-keeper"}
                     level="second"
                   />
                 </div>

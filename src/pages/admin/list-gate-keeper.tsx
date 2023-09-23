@@ -3,8 +3,16 @@ import { useState, useEffect } from "react";
 import { Layout } from "../../components/Layout";
 import localStorageCustom from "../../utils/localStorageCustom";
 import { Link } from "gatsby";
-import { CogIcon, KeyIcon, PlusCircleIcon } from "@heroicons/react/24/solid";
+import {
+  CogIcon,
+  KeyIcon,
+  PencilIcon,
+  PlusCircleIcon,
+  TrashIcon,
+} from "@heroicons/react/24/solid";
 import MiddlewareAdminRoute from "../../components/middlewares/MiddlewareAdminRoute";
+import ModalDeleteUser from "../../components/modals/ModalDeleteUser";
+import ModalUpdateUser from "../../components/modals/ModalUpdateUser";
 
 interface IData {
   username: string;
@@ -15,6 +23,10 @@ interface IData {
 const ListGateKeeper = () => {
   const [data, setData] = useState<IData[]>();
   const [count, setCount] = useState<number>(0);
+  const [usernameDelete, setUsernameDelete] = useState<string>("");
+  const [usernameUpdate, setUsernameUpdate] = useState<string>("");
+  const [isModalDeleteOpen, setIsModalDeleteOpen] = useState<boolean>(false);
+  const [isModalUpdateOpen, setIsModalUpdateOpen] = useState<boolean>(false);
 
   const getdata = async () => {
     try {
@@ -37,7 +49,7 @@ const ListGateKeeper = () => {
 
   useEffect(() => {
     getdata();
-  }, []);
+  }, [isModalDeleteOpen]);
 
   return (
     <Layout>
@@ -48,7 +60,7 @@ const ListGateKeeper = () => {
               <h1 className="flex flex-wrap justify-between text-lg">
                 Lista de usuarios
                 {localStorageCustom("role") === "ADMIN" ? (
-                  <Link to={"/admin/create-gate-keeper"} className="flex">
+                  <Link to={"/admin/gate-keeper/create"} className="flex">
                     <PlusCircleIcon width={20} className="mr-1" />
                     Nuevo
                   </Link>
@@ -87,12 +99,36 @@ const ListGateKeeper = () => {
                           <td>{item.created_at}</td>
                           {localStorageCustom("role") === "ADMIN" ? (
                             <td>
-                              <div className="flex justify-center items-center">
+                              <div className="flex justify-around items-center min-w-[110px]">
                                 <Link
                                   to={`/admin/gate-keeper/${item.username}`}
                                 >
                                   <CogIcon width={20} />
                                 </Link>
+                                <button
+                                  className="border-none"
+                                  onClick={() => {
+                                    setIsModalUpdateOpen(!isModalUpdateOpen),
+                                      setUsernameUpdate(item.username);
+                                  }}
+                                >
+                                  <PencilIcon
+                                    width={20}
+                                    className="text-blue-500"
+                                  />
+                                </button>
+                                <button
+                                  className="border-none"
+                                  onClick={() => {
+                                    setIsModalDeleteOpen(!isModalDeleteOpen),
+                                      setUsernameDelete(item.username);
+                                  }}
+                                >
+                                  <TrashIcon
+                                    width={20}
+                                    className="text-red-500"
+                                  />
+                                </button>
                               </div>
                             </td>
                           ) : (
@@ -114,6 +150,16 @@ const ListGateKeeper = () => {
               </div>
             </div>
           </div>
+          <ModalDeleteUser
+            isOpen={isModalDeleteOpen}
+            onClose={() => setIsModalDeleteOpen(!isModalDeleteOpen)}
+            username={usernameDelete}
+          />
+          <ModalUpdateUser
+            isOpen={isModalUpdateOpen}
+            onClose={() => setIsModalUpdateOpen(!isModalUpdateOpen)}
+            username={usernameUpdate}
+          />
         </section>
       </MiddlewareAdminRoute>
     </Layout>

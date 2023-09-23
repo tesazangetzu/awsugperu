@@ -1,14 +1,14 @@
 import * as React from "react";
 import * as Yup from "yup";
 import { useState } from "react";
-import { Layout } from "../../components/Layout";
+import { Layout } from "../../../components/Layout";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import { renderErrorMessage } from "../../utils/renderErrorMessage";
+import { renderErrorMessage } from "../../../utils/renderErrorMessage";
 import { navigate } from "gatsby";
-import localStorageCustom from "../../utils/localStorageCustom";
-import { Button } from "../../components/Button";
-import { Loader } from "../../components/Loader";
-import MiddlewareAdminRoute from "../../components/middlewares/MiddlewareAdminRoute";
+import localStorageCustom from "../../../utils/localStorageCustom";
+import { Button } from "../../../components/Button";
+import { Loader } from "../../../components/Loader";
+import MiddlewareAdminRoute from "../../../components/middlewares/MiddlewareAdminRoute";
 
 interface ILogin {
   username: string;
@@ -147,4 +147,4 @@ const CreateUser = () => {
 
 export default CreateUser;
 
-export { Head } from "./login";
+export { Head } from "../login";

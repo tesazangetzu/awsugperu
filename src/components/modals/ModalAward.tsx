@@ -1,7 +1,7 @@
 import React from "react";
 import { GiftIcon, XMarkIcon } from "@heroicons/react/24/solid";
-import llamita from "../images/llama-404.png";
-import { Button } from "./Button";
+import llamita from "../../images/llama-404.png";
+import { Button } from "../Button";
 
 interface ModalProps {
   isOpen: boolean;

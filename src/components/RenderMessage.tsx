@@ -6,19 +6,25 @@ type IRenderMessage = {
   error?: boolean;
 };
 
-export const RenderMessage = ({ message, error }: IRenderMessage) => {
+export const RenderMessage = ({ message = "", error }: IRenderMessage) => {
   return (
-    <p
-      className={`flex items-center justify-center ${
-        error ? "text-red-500" : "text-green-500"
-      }`}
-    >
-      {error ? (
-        <ExclamationTriangleIcon className="w-4 h-4 mr-1" />
+    <>
+      {message !== "" ? (
+        <p
+          className={`flex items-center justify-center ${
+            error ? "text-red-500" : "text-green-500"
+          }`}
+        >
+          {error ? (
+            <ExclamationTriangleIcon className="w-4 h-4 mr-1" />
+          ) : (
+            <CheckIcon className="w-4 h-4 mr-1" />
+          )}
+          {message}
+        </p>
       ) : (
-        <CheckIcon className="w-4 h-4 mr-1" />
+        ""
       )}
-      {message}
-    </p>
+    </>
   );
 };

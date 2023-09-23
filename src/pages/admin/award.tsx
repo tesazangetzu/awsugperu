@@ -5,7 +5,7 @@ import { Layout } from "../../components/Layout";
 import { renderErrorMessage } from "../../utils/renderErrorMessage";
 import { CameraIcon } from "@heroicons/react/24/solid";
 import localStorageCustom from "../../utils/localStorageCustom";
-import ModalAward from "../../components/ModalAward";
+import ModalAward from "../../components/modals/ModalAward";
 import { navigate } from "gatsby";
 import MiddlewareAdminRoute from "../../components/middlewares/MiddlewareAdminRoute";
 

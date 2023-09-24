@@ -46,7 +46,7 @@ const ListPeople = () => {
   };
 
   useEffect(() => {
-    getdata();
+    // getdata();
   }, [params]);
 
   return (
@@ -58,22 +58,11 @@ const ListPeople = () => {
               <h1 className="flex flex-wrap justify-between text-lg mb-3">
                 Lista de personas
               </h1>
-              <div className="sm:block md:flex justify-between items-center">
-                <div className="sm:w-full md:w-2/4 relative">
-                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <SearchSVG />
-                  </div>
-                  <input
-                    type="search"
-                    className="block p-3 pl-10 text-sm text-slate-700 border border-slate-700 rounded-lg bg-gray-50"
-                    placeholder="Buscar"
-                    onChange={(e) => search(e.target.value)}
-                  />
-                </div>
-                <div className="sm:block sm:w-full sm:pt-2 md:flex md:w-2/4 justify-end items-center ">
+              <div className="sm:block mb-2 md:flex justify-between items-center">
+                <div className="sm:block sm:w-full sm:mb-2 md:flex md:w-2/4 items-center">
                   <label>Buscar por:</label>
                   <select
-                    className="block px-5 py-3 border border-slate-700 rounded-md ml-1"
+                    className="block px-5 py-3 border border-slate-700 rounded-md md:ml-1"
                     onChange={(e) => {
                       setSearchFor(e.target.value);
                     }}
@@ -84,6 +73,17 @@ const ListPeople = () => {
                     <option value="first_name">Nombre</option>
                     <option value="last_name">Apellido</option>
                   </select>
+                </div>
+                <div className="sm:w-full md:w-2/4 relative">
+                  <div className="absolute inset-y-0 sm:left-0 md:left-auto md:right-[180px] flex items-center pl-3 pointer-events-none">
+                    <SearchSVG />
+                  </div>
+                  <input
+                    type="search"
+                    className="block p-3 pl-10 text-sm text-slate-700 border border-slate-700 rounded-lg bg-gray-50 md:ml-auto md:mr-0"
+                    placeholder="Buscar"
+                    onChange={(e) => search(e.target.value)}
+                  />
                 </div>
               </div>
               <div className="overflow-x-scroll md:overflow-x-hidden">

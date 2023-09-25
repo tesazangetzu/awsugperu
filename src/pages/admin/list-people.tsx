@@ -19,6 +19,7 @@ const ListPeople = () => {
   const [searchFor, setSearchFor] = useState<string>("identification_document");
 
   const search = (value: string) => {
+    if (value === "") setParams("");
     if (value.length > 2) setParams(`${searchFor}=${value}`);
   };
 
@@ -46,7 +47,8 @@ const ListPeople = () => {
   };
 
   useEffect(() => {
-    // getdata();
+    console.log("entro");
+    getdata();
   }, [params]);
 
   return (
